@@ -25,3 +25,21 @@ export function splitSources(answer, sources) {
   const cited = order.filter((n) => byNr.has(n)).map((n) => byNr.get(n));
   return { cited, others: sources.filter((s) => !cited.includes(s)) };
 }
+
+const AUDIO_HOST = "audio.podigee-cdn.net";
+
+/** Link zur eigenen Abspielseite (springt selbst an die Stelle – ein reines #t= im Link wirkt nicht in jedem Browser). */
+export function playerLink(url, title) {
+  const m = /^(https:\/\/audio\.podigee-cdn\.net\/[^#]+)(?:#t=(\d+))?$/.exec(url || "");
+  if (!m) return "";
+  return "player.html?" + new URLSearchParams({ src: m[1], t: m[2] || "0", title: title || "" }).toString();
+}
+
+export function parsePlayerParams(search) {
+  const p = new URLSearchParams(search);
+  let u;
+  try { u = new URL(p.get("src") || ""); } catch { return null; }
+  if (u.protocol !== "https:" || u.hostname !== AUDIO_HOST) return null;
+  const t = Number(p.get("t"));
+  return { src: u.toString(), t: Number.isFinite(t) && t > 0 ? Math.floor(t) : 0, title: p.get("title") || "" };
+}

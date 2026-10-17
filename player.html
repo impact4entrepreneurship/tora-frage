@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Aufnahme anhören</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<main class="wrap">
+  <h1 id="title">Aufnahme</h1>
+  <p class="lead" id="info"></p>
+  <audio id="audio" controls preload="metadata" style="width:100%"></audio>
+  <p><button id="play" hidden>Ab hier abspielen</button></p>
+  <p id="status" role="status"></p>
+  <footer><a href="index.html">Zurück zur Fragenseite</a> · <a id="direct" target="_blank" rel="noopener">Aufnahme direkt öffnen</a></footer>
+</main>
+<script type="module" src="player.js"></script>
+</body>
+</html>

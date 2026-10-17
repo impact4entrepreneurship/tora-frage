@@ -1,4 +1,4 @@
-import { sourceLabel, linkify, splitBold, splitSources } from "./util.mjs";
+import { sourceLabel, linkify, splitBold, splitSources, playerLink } from "./util.mjs";
 
 const $ = (id) => document.getElementById(id);
 const EXAMPLES = ["Was bedeutet das Wort Schechina?", "Was ist ein Segen in der Tora?", "Was sagt die Tora über Gerechtigkeit?"];
@@ -18,8 +18,9 @@ function card(s) {
   const h = document.createElement("h3"); h.dir = "auto"; h.textContent = s.title;
   const p = document.createElement("p"); p.dir = "auto"; p.textContent = s.excerpt;
   el.append(meta, h, p);
-  const href = linkify(s.url);
-  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Zur Quelle"; el.append(a); }
+  const player = playerLink(s.url, s.title);
+  const href = player || linkify(s.url);
+  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = player ? "Aufnahme anhören (ab dieser Stelle)" : "Zur Quelle"; el.append(a); }
   return el;
 }
 
