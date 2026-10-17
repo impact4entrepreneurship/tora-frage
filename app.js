@@ -1,4 +1,4 @@
-import { sourceLabel, linkify, splitBold } from "./util.mjs";
+import { sourceLabel, linkify, splitBold, splitSources } from "./util.mjs";
 
 const $ = (id) => document.getElementById(id);
 const EXAMPLES = ["Was bedeutet das Wort Schechina?", "Was ist ein Segen in der Tora?", "Was sagt die Tora über Gerechtigkeit?"];
@@ -37,7 +37,10 @@ $("go").onclick = async () => {
       if (!s.bold) return document.createTextNode(s.text);
       const b = document.createElement("strong"); b.textContent = s.text; return b;
     }));
-    $("sources").replaceChildren(...(j.sources || []).map(card));
+    const { cited, others } = splitSources(j.answer, j.sources || []);
+    const group = (title, list) => list.length ? [Object.assign(document.createElement("h3"), { className: "group", textContent: title }), ...list.map(card)] : [];
+    $("sources").replaceChildren(...group("In der Antwort genutzt", cited), ...group(cited.length ? "Weitere Fundstellen" : "Fundstellen", others));
+    $("sources-title").hidden = !(j.sources || []).length;
     $("answer").hidden = false;
   } catch {
     $("status").textContent = "Keine Verbindung. Bitte prüfe dein Internet und versuche es noch einmal.";

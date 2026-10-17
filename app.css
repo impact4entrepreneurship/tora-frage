@@ -23,3 +23,5 @@ button:disabled { opacity:.5; cursor:wait; }
 .card p { margin:0 0 8px; font-size:15px; color:var(--grau); }
 .card a, footer a { color:var(--accent); font-weight:600; }
 footer { margin-top:44px; font-size:14px; }
+
+.group { font-family:Inter,sans-serif; font-size:14px; font-weight:600; color:var(--grau); text-transform:none; margin:20px 0 10px; }
