@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Verwaltung Tora-Fragen</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css"></head>
+<body><main class="wrap">
+<h1>Verwaltung</h1>
+<label for="token">Admin-Schlüssel</label><input id="token" type="password" autocomplete="off">
+<p><button id="load">Anzeigen</button></p><div id="status" role="status"></div>
+<section id="panel" hidden>
+  <h2>Budget diesen Monat</h2><div class="card" id="budget"></div>
+  <h2>Quellen</h2><div id="sources"></div>
+  <h2>Zugangscodes</h2><div id="codes"></div>
+  <h3>Neuen Code anlegen</h3>
+  <input id="n-code" placeholder="Code, mindestens 4 Zeichen"><input id="n-label" placeholder="Wer bekommt ihn?" style="margin-top:8px">
+  <input id="n-limit" type="number" value="20" min="1" style="margin-top:8px"><p><button id="add">Code anlegen</button></p>
+</section></main>
+<script src="config.js"></script><script type="module" src="admin.js"></script></body></html>

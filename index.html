@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tora-Tiefe Fragen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>Frag die Tora-Tiefe</h1>
+  <p class="lead">Stelle eine Frage – die Antwort kommt ausschließlich aus den Ausarbeitungen, Aufnahmen und Notizen der Tora-Tiefe, mit Quellenangabe.</p>
+
+  <label for="code">Dein Zugangscode</label>
+  <input id="code" autocomplete="off" autocapitalize="off" placeholder="z. B. tora-1234">
+
+  <label for="q">Deine Frage</label>
+  <textarea id="q" rows="3" maxlength="500" dir="auto" placeholder="Was bedeutet das Wort Schechina?"></textarea>
+  <div class="examples" id="examples"></div>
+  <button id="go">Frage stellen</button>
+
+  <div id="status" role="status" aria-live="polite"></div>
+  <section id="answer" hidden>
+    <h2>Antwort</h2>
+    <div id="answer-text" dir="auto"></div>
+    <p class="hint">Die KI kann sich irren. Lies die Quellen unten nach, bevor du dich auf die Antwort verlässt.</p>
+    <h2>Quellen</h2>
+    <div id="sources"></div>
+  </section>
+  <footer><a href="datenschutz.html">Datenschutz</a></footer>
+</main>
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
