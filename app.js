@@ -1,4 +1,4 @@
-import { sourceLabel, linkify } from "./util.mjs";
+import { sourceLabel, linkify, splitBold } from "./util.mjs";
 
 const $ = (id) => document.getElementById(id);
 const EXAMPLES = ["Was bedeutet das Wort Schechina?", "Was ist ein Segen in der Tora?", "Was sagt die Tora über Gerechtigkeit?"];
@@ -33,7 +33,10 @@ $("go").onclick = async () => {
     const j = await r.json();
     if (!r.ok) { $("status").textContent = j.message || "Es ist ein Fehler aufgetreten."; return; }
     $("status").textContent = "";
-    $("answer-text").textContent = j.answer;
+    $("answer-text").replaceChildren(...splitBold(j.answer).map((s) => {
+      if (!s.bold) return document.createTextNode(s.text);
+      const b = document.createElement("strong"); b.textContent = s.text; return b;
+    }));
     $("sources").replaceChildren(...(j.sources || []).map(card));
     $("answer").hidden = false;
   } catch {
