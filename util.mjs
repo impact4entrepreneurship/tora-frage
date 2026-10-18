@@ -1,6 +1,6 @@
 const NAMES = { "tora-tief": "Tora Tiefe", verwurzelt: "verwurzelt.eu", tonarchiv: "Lapide Tonarchiv", evernote: "Michaels Notizen" };
 export const sourceLabel = (s) => NAMES[s] ?? s;
-export const linkify = (u) => (/^https?:\/\//i.test(u) ? u : "");
+export const linkify = (u) => (/^(https?:\/\/|evernote:\/\/\/view\/)/i.test(u) ? u : "");
 
 export function splitBold(text) {
   const out = [];

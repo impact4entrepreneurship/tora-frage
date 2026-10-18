@@ -20,7 +20,7 @@ function card(s) {
   el.append(meta, h, p);
   const player = playerLink(s.url, s.title);
   const href = player || linkify(s.url);
-  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = player ? "Aufnahme anhören (ab dieser Stelle)" : "Zur Quelle"; el.append(a); }
+  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = player ? "Aufnahme anhören (ab dieser Stelle)" : href.startsWith("evernote:") ? "In Evernote öffnen" : "Zur Quelle"; el.append(a); }
   return el;
 }
 
