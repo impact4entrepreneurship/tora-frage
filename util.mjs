@@ -43,3 +43,22 @@ export function parsePlayerParams(search) {
   const t = Number(p.get("t"));
   return { src: u.toString(), t: Number.isFinite(t) && t > 0 ? Math.floor(t) : 0, title: p.get("title") || "" };
 }
+
+// Textmarke (Text Fragment): Der Browser scrollt zur Stelle und hebt sie hervor; wird sie nicht gefunden, öffnet sich die Seite ganz normal.
+const fragEnc = (s) => encodeURIComponent(s).replace(/-/g, "%2D");
+const edgeWords = (p, n, fromEnd) => {
+  const w = (p || "").replace(/…/g, " ").split(/\s+/).filter(Boolean);
+  const part = (fromEnd ? w.slice(-n) : w.slice(0, n)).join(" ");
+  return part.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "");
+};
+
+export function textFragmentLink(url, excerpt) {
+  if (!/^https?:\/\//i.test(url || "") || url.includes("#")) return url || "";
+  const [first = "", second = ""] = String(excerpt || "").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+  const start = edgeWords(first, 6, false);
+  if (start.length < 12 && !second) return url;
+  // Sehr kurzer erster Absatz (Überschrift): von dort bis zum Anfang des nächsten Absatzes markieren.
+  const end = first.split(/\s+/).length < 4 && second ? edgeWords(second, 3, false) : "";
+  if (start.length < 3) return url;
+  return `${url}#:~:text=${fragEnc(start)}${end ? "," + fragEnc(end) : ""}`;
+}

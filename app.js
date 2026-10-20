@@ -1,4 +1,4 @@
-import { sourceLabel, linkify, splitBold, splitSources, playerLink } from "./util.mjs";
+import { sourceLabel, linkify, splitBold, splitSources, playerLink, textFragmentLink } from "./util.mjs";
 
 const $ = (id) => document.getElementById(id);
 const EXAMPLES = ["Was bedeutet das Wort Schechina?", "Was ist ein Segen in der Tora?", "Was sagt die Tora über Gerechtigkeit?"];
@@ -19,8 +19,8 @@ function card(s) {
   const p = document.createElement("p"); p.dir = "auto"; p.textContent = s.excerpt;
   el.append(meta, h, p);
   const player = playerLink(s.url, s.title);
-  const href = player || linkify(s.url);
-  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = player ? "Aufnahme anhören (ab dieser Stelle)" : href.startsWith("evernote:") ? "In Evernote öffnen" : "Zur Quelle"; el.append(a); }
+  const href = player || textFragmentLink(linkify(s.url), s.excerpt);
+  if (href) { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = player ? "Aufnahme anhören (ab dieser Stelle)" : href.startsWith("evernote:") ? "In Evernote öffnen" : href.includes("#:~:text=") ? "Zur Stelle auf der Seite" : "Zur Quelle"; el.append(a); }
   return el;
 }
 
