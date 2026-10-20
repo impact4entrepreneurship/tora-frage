@@ -1,4 +1,4 @@
-const NAMES = { "tora-tief": "Tora Tiefe", verwurzelt: "verwurzelt.eu", tonarchiv: "Lapide Tonarchiv", evernote: "Michaels Notizen" };
+const NAMES = { "tora-tief": "Tora Tiefe", verwurzelt: "verwurzelt.eu", tonarchiv: "Lapide Tonarchiv", evernote: "Michaels Notizen", podcasts: "Michaels Podcasts" };
 export const sourceLabel = (s) => NAMES[s] ?? s;
 export const linkify = (u) => (/^(https?:\/\/|evernote:\/\/\/view\/)/i.test(u) ? u : "");
 
